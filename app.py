@@ -1,13 +1,9 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import preprocessor
-import helper
 import plotly.express as px
+import streamlit as st
 from plotly import figure_factory as ff
 
+import helper
+import preprocessor
 
 st.set_page_config(layout="wide")
 st.sidebar.image('Olympic-Symbol.png')
