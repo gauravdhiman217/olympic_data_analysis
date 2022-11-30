@@ -49,7 +49,7 @@ def fetch_medal(df, years, country):
         graph = pd.melt(graph,id_vars=['Region'],value_vars=['Gold','Silver','Bronze'])
         
     temp['Total'] = temp['Gold'] + temp['Silver'] + temp['Bronze']
-
+    graph = graph.drop_duplicates(subset=['Year', 'Sport', 'Games', 'Team', 'City', 'Event', 'Medal', 'Noc'])
     return temp,graph
 
 
