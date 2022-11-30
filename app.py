@@ -44,7 +44,7 @@ if user_menu == 'Medal Tally':
         if selected_country == "Overall":
             fig = px.bar(graph, x='Region', y='value', color='variable', labels={
                          'value': "No of Medals win"}, title="Top 10 countries from medal tally")
-        fig.update(layout_showlegend=False)
+        fig.update(layout_showlegend=True)
         fig.update_layout(margin=dict(t=25, b=0, l=0, r=0))
         st.plotly_chart(fig)
     st.write(
