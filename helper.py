@@ -31,8 +31,8 @@ def fetch_medal(df, years, country):
     if years != 'Overall' and country != 'Overall':
         flag = 1
         temp = df[(df['Region'] == country) & (df['Year'] == years)]
-    graph = temp
     temp = temp.drop_duplicates(subset=['Year', 'Sport', 'Games', 'Team', 'City', 'Event', 'Medal', 'Noc'])
+    graph = temp
     if flag == 1:
         temp = temp.groupby('Year').sum()[
             ['Gold', 'Silver', 'Bronze']].sort_values('Year')
@@ -49,7 +49,6 @@ def fetch_medal(df, years, country):
         graph = pd.melt(graph,id_vars=['Region'],value_vars=['Gold','Silver','Bronze'])
         
     temp['Total'] = temp['Gold'] + temp['Silver'] + temp['Bronze']
-    graph = graph.drop_duplicates(subset=['Year', 'Sport', 'Games', 'Team', 'City', 'Event', 'Medal', 'Noc'])
     return temp,graph
 
 
