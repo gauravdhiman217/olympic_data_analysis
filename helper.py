@@ -32,24 +32,25 @@ def fetch_medal(df, years, country):
         flag = 1
         temp = df[(df['Region'] == country) & (df['Year'] == years)]
     temp = temp.drop_duplicates(subset=['Year', 'Sport', 'Games', 'Team', 'City', 'Event', 'Medal', 'Noc'])
-    graph = temp
+    graph_df = temp
+
     if flag == 1:
         temp = temp.groupby('Year').sum()[
             ['Gold', 'Silver', 'Bronze']].sort_values('Year')
-        graph = graph.groupby('Sport').sum()[
+        graph_df = graph_df.groupby('Sport').sum()[
             ['Gold', 'Silver', 'Bronze']].sort_values('Gold', ascending=False)
-        graph = graph.reset_index()
-        graph = pd.melt(graph,id_vars=['Sport'],value_vars=['Gold','Silver','Bronze'])
+        graph_df = graph_df.reset_index()
+        graph_df = pd.melt(graph_df,id_vars=['Sport'],value_vars=['Gold','Silver','Bronze'])
     else:
         temp = temp.groupby('Region').sum()[
             ['Gold', 'Silver', 'Bronze']].sort_values('Gold', ascending=False)
-        graph = graph.groupby('Region').sum()[
+        graph_df = graph_df.groupby('Region').sum()[
             ['Gold', 'Silver', 'Bronze']].sort_values('Gold', ascending=False)
-        graph = graph.reset_index().head(10)
-        graph = pd.melt(graph,id_vars=['Region'],value_vars=['Gold','Silver','Bronze'])
+        graph_df = graph_df.reset_index().head(10)
+        graph_df = pd.melt(graph_df,id_vars=['Region'],value_vars=['Gold','Silver','Bronze'])
         
     temp['Total'] = temp['Gold'] + temp['Silver'] + temp['Bronze']
-    return temp,graph
+    return temp,graph_df
 
 
 def pie_medal_tally(df,years,country):
